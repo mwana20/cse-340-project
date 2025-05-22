@@ -95,6 +95,7 @@ utilities.buildSingleVehicleDisplay = async (vehicle) => {
   svd += "</div>"
   svd += "</section>"
   return svd
+  module
 }
 
 module.exports = utilities
