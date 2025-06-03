@@ -9,9 +9,10 @@ const isDevelopment = process.env.NODE_ENV === "development"
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: isDevelopment
-    ? { rejectUnauthorized: false } // needed for local SSL
-    : false, // no SSL in production
+    ? false
+    : { rejectUnauthorized: false },
 })
+
 
 // Optional: log queries in development
 async function query(text, params) {
