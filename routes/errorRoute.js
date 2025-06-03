@@ -6,3 +6,4 @@ const errorController = require("../controllers/errorController");
 router.get("/trigger-error", errorController.triggerError); // Ensure the callback is defined and used correctly
 
 module.exports = router;
+// This route is used to trigger an error for testing purposes
