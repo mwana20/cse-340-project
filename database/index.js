@@ -1,6 +1,5 @@
-const { Pool } = require("pg")
 require("dotenv").config()
-
+const { Pool } = require("pg")
 /* ***************
  * Connection Pool with conditional SSL
  * *************** */
