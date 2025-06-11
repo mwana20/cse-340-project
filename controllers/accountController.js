@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const { validationResult } = require("express-validator");
 
+const jwtSecret = process.env.JWT_SECRET || "your_super_secret_key";
+
 /* ****************************************
 *  Deliver login view
 * *************************************** */
@@ -126,7 +128,7 @@ async function accountLogin(req, res) {
     };
 
     // Generate JWT token
-    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, jwtSecret, { expiresIn: "1h" });
 
     // Configure cookie options
     const cookieOptions = {
@@ -254,4 +256,46 @@ async function changePassword(req, res, next) {
   res.redirect("/account");
 }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAccount, buildUpdateView, updateAccount, changePassword }
+// Render the ticket submission view
+async function buildSubmitTicketView(req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("account/tickets", {
+    title: "Submit Ticket",
+    nav,
+    errors: null,
+    locals: res.locals,
+  });
+}
+
+// Handle ticket submission (stub)
+async function submitTicket(req, res, next) {
+  // You can add your ticket saving logic here
+  req.flash("notice", "Ticket submitted successfully!");
+  res.redirect("/account/tickets");
+}
+
+// Render the user's tickets view (stub)
+async function buildUserTicketsView(req, res, next) {
+  const nav = await utilities.getNav();
+  // You can fetch user's tickets here
+  res.render("account/myTickets", {
+    title: "My Tickets",
+    nav,
+    tickets: [], // Replace with actual tickets
+    locals: res.locals,
+  });
+}
+
+module.exports = {
+  buildLogin,
+  buildRegistration,
+  registerAccount,
+  accountLogin,
+  buildAccount,
+  buildUpdateView,
+  updateAccount,
+  changePassword,
+  buildSubmitTicketView,
+  submitTicket,
+  buildUserTicketsView
+}
