@@ -12,7 +12,7 @@ const dotenv = require("dotenv").config();
 const app = express();
 const staticRoutes = require("./routes/static");
 const baseController = require("./controllers/baseController");
-const inventoryRoutes = require("./routes/inventoryRoutes"); // Corrected filename
+const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const errorRoute = require("./routes/errorRoute");
 const utilities = require("./utilities/");
@@ -87,7 +87,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/account", accountRoute);
 
 // Restricted Routes
-app.use("/inv", inventoryRoutes); // Ensure this matches the corrected variable name
+app.use("/inv", inventoryRoute);
 
 // Test Route
 app.get("/account/test", (req, res) => {
@@ -123,7 +123,7 @@ app.use((err, req, res, next) => {
 /* ***********************
  * Server Configuration
  *************************/
-const port = process.env.PORT || 5500;
+const port = process.env.PORT || 5000; 
 const host = process.env.HOST || "localhost";
 
 app.listen(port, () => {

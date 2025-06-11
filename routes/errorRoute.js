@@ -3,7 +3,6 @@ const router = new express.Router();
 const errorController = require("../controllers/errorController");
 
 // Intentional error route
-router.get("/trigger-error", errorController.triggerError); // Ensure the callback is defined and used correctly
+router.get("/trigger-error", errorController.triggerError);
 
 module.exports = router;
-// This route is used to trigger an error for testing purposes
